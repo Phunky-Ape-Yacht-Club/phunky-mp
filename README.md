@@ -1,8 +1,10 @@
 # `PAYC Marketplace`
 
+![Preview](payc.png)
+
 # ⭐️ `Star us`
 
-Star us for the phunky vibes. 
+If you like to get phunky, please star us :) 
 
 # 🚀 Quick Start
 
@@ -18,6 +20,7 @@ git clone https://github.com/Phunky-Ape-Yacht-Club/phunky-mp.git
 cd payc-marketplace
 yarn install
 ```
+
 
 🚴‍♂️ Run your App:
 
