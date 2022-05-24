@@ -1,0 +1,70 @@
+{
+  "name": "payc-marketplace",
+  "version": "0.1.0",
+  "private": true,
+  "dependencies": {
+    "@ant-design/icons": "^4.7.0",
+    "@emotion/react": "^11.7.1",
+    "@emotion/styled": "^11.6.0",
+    "@fortawesome/fontawesome-svg-core": "^1.2.36",
+    "@fortawesome/free-brands-svg-icons": "^5.15.4",
+    "@fortawesome/react-fontawesome": "^0.1.16",
+    "@openzeppelin/contracts": "^4.4.1",
+    "@testing-library/jest-dom": "^5.11.4",
+    "@testing-library/react": "^11.1.0",
+    "@testing-library/user-event": "^12.1.10",
+    "@walletconnect/web3-provider": "^1.6.6",
+    "antd": "^4.16.13",
+    "bn.js": "^5.2.0",
+    "eslint": "^7.32.0",
+    "fuse.js": "^6.5.3",
+    "moralis": "^0.0.118",
+    "react": "^17.0.2",
+    "react-blockies": "^1.4.1",
+    "react-confetti": "^6.0.1",
+    "react-dom": "^17.0.2",
+    "react-moralis": "^0.2.6",
+    "react-player": "^2.9.0",
+    "react-router": "^5.2.1",
+    "react-router-dom": "^5.3.0",
+    "react-scripts": "4.0.3",
+    "react-use": "^17.3.2",
+    "uuid": "^8.3.2",
+    "web-vitals": "^1.0.1",
+    "yarn": "^1.22.17"
+  },
+  "scripts": {
+    "start": "react-scripts start",
+    "build": "react-scripts build",
+    "test": "react-scripts test",
+    "eject": "react-scripts eject",
+    "devchain": "node Truffle/scripts/devChain.js",
+    "connect": "moralis-admin-cli connect-local-devchain",
+    "watch:events": "moralis-admin-cli add-contract",
+    "deploy": "node Truffle/scripts/deployContract.js",
+    "prepare": "husky install"
+  },
+  "eslintConfig": {
+    "extends": [
+      "react-app",
+      "react-app/jest"
+    ]
+  },
+  "browserslist": {
+    "production": [
+      ">0.2%",
+      "not dead",
+      "not op_mini all"
+    ],
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
+    ]
+  },
+  "devDependencies": {
+    "husky": "^7.0.0",
+    "prettier": "2.5.1",
+    "pretty-quick": "^3.1.3"
+  }
+}

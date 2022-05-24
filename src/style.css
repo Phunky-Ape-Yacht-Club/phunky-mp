@@ -1,0 +1,100 @@
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item:hover::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu:hover::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-active::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-active::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-open::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-open::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-item-selected::after,
+.ant-menu-horizontal:not(.ant-menu-dark) > .ant-menu-submenu-selected::after {
+  border-bottom: 2px solid #21bf96 !important;
+}
+
+.ant-menu-horizontal > .ant-menu-item-selected a,
+.ant-menu-horizontal > .ant-menu-item a:hover {
+  color: #21bf96 !important;
+}
+
+.ant-modal {
+  /*width: 80vw !important;*/
+  /*height: 80vh !important;*/
+}
+
+.ant-modal-content {
+  overflow: auto;
+  border: 1px solid #4c4c4c;
+  border-radius: 8px;
+  background: #1f1f1f;
+}
+
+.ant-modal-header {
+  background: transparent;
+  border-color: #4c4c4c;
+}
+
+.ant-modal-title {
+  color: white;
+}
+.ant-modal-body {
+  color: white;
+}
+
+.ant-modal-footer {
+  border-top: 1px solid #4c4c4c !important;
+  padding: 16px 24px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 24px;
+}
+
+.ant-btn {
+  height: initial;
+  background-color: transparent;
+  color: #bfc500;
+  border: 1px solid #bfc500;
+  border-radius: 8px;
+  font-weight: 700;
+  font-size: 16px;
+  padding: 8px 16px;
+  margin: auto auto !important;
+  transition: 0.3s;
+  width: 100%;
+  text-transform: uppercase;
+  cursor: pointer;
+  display: flex;
+  justify-content: center;
+}
+
+.ant-btn:hover {
+  border-color: #bfc500;
+  background: white;
+  color: black;
+}
+
+.ant-btn-primary {
+  background: #bfc500;
+  color: black;
+}
+
+.ant-btn-primary:hover {
+  border-color: #bfc500;
+  background: white;
+  color: black;
+}
+
+.ant-dropdown {
+  padding-top: 0.5rem;
+}
+
+.ant-dropdown-menu {
+  background: #1f1f1f;
+  border-radius: 8px;
+  border: 1px solid #4c4c4c;
+}
+
+.ant-dropdown-menu-item {
+  color: white;
+}
+
+.ant-dropdown-menu-item:hover {
+  color: black;
+}
