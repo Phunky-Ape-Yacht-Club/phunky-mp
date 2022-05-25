@@ -19,11 +19,9 @@ import { Flex } from '../../uikit/Flex/Flex'
 function Marketplace({ web3, delegate }) {
   // example: logged to console the mock subgraph data on rinkeby
   const marketDataHook = useSubgraphData()
-
   // Filter Region
   const [state, dispatch] = useReducer(reducer, getInitialState())
   // Filter Region End
-
   // Forwarding to token details
   const history = useHistory()
   const goToNFT = (tokenId) => {

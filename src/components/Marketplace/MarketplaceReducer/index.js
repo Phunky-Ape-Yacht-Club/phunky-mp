@@ -115,9 +115,11 @@ function reducer(state, action) {
         ape.phunkyApeId = payc.phunkyApeId
         return ape
       })
-      console.log(apeBids)
+
       const listedDB = createNewFuseDbFromApeIds(apeListed)
       const bidsDB = createNewFuseDbFromApeIds(apeBids)
+
+      console.log(listedDB)
 
       let nextDB = []
       if (state.selectedView === 'for_sale') {

@@ -18,18 +18,6 @@ export const useSubgraphData = (web3) => {
             minValue
             currentOwner
           }
-          phunkyApeSales(first: 20) {
-            id
-            phunkyApe {
-              id
-              isForSale
-              minValue
-              currentOwner
-            }
-            blockNumber
-            salePrice
-            soldFrom
-          }
           bids {
             bidAmount
             phunkyApe {

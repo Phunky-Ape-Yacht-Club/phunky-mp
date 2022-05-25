@@ -2,8 +2,6 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { Image } from 'antd'
 import fallbackImg from 'helpers/fallbackImg'
-import { cryptoPhunksMarketAbi } from '../../contracts/abi/cryptoPhunksMarketABI'
-import { paycMarketPlaceContractAddr, paycSubGraphAPI } from '../../consts'
 import { buyPhunkyApe } from '../../contracts/contractUtil'
 import BN from 'bn.js'
 
@@ -22,6 +20,9 @@ const NFTCard = ({
   const imgLocation = localDirectory + nft.num + '.png'
   // min value comes in wei so we need to convert it into a Big Number and then to ETH for
   // display but keep the wei value for when we make the transctions to the contracts
+  if (!nft.minValue) {
+    nft.minValue = '69420'
+  }
   const price = new BN(nft.minValue)
   const ethPrice = web3 !== undefined ? web3.utils.fromWei(price, 'ether') : ''
 
