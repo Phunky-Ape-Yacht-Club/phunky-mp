@@ -3,7 +3,6 @@ import { useHistory, useParams } from 'react-router'
 import { useSubgraphData } from '../../hooks/useSubgraphData'
 import styled from '@emotion/styled'
 import { Image, Input, Modal } from 'antd'
-import { useMoralis } from 'react-moralis'
 
 import Header from 'components/Header/Header'
 import CommonContainer from 'uikit/CommonContainer/CommonContainer'
@@ -14,7 +13,7 @@ import { Flex } from '../../uikit/Flex/Flex'
 import PrimaryButton, { SecondaryButton } from '../../uikit/Buttons/Buttons'
 import fallbackImg from 'helpers/fallbackImg'
 import { getApeByID } from '../../db'
-import { useSetState } from 'react-use'
+
 import { buyPhunkyApe, bidOnPhunkyApe } from '../../contracts/contractUtil'
 import Spinners from '../Spinners/Spinners'
 import ConfettiContainer from '../ConfettiContainer/ConfettiContainer'
@@ -35,11 +34,12 @@ const NFTDetails = ({ web3 }) => {
 
   const [token, setToken] = useState(null)
 
+  console.log(token)
   // TODO
   useEffect(() => {
     const ape = getApeByID(id)
-    ape.image = `/ipfs/${ape.num}.png`
-
+    ape.image = `https://payc-images.s3.amazonaws.com/ipfs/${ape.num}.png`
+    console.log(ape.image)
     setToken(ape)
   }, [id, token])
 
@@ -91,7 +91,6 @@ const NFTDetails = ({ web3 }) => {
   const [showBidModal, setShowBidModal] = useState(false)
 
   const history = useHistory()
-
   useEffect(() => {
     if (web3) {
       fetchSubgraphByHexId(web3.utils.toHex(id)).then((nft) => {
@@ -162,7 +161,7 @@ const NFTDetails = ({ web3 }) => {
         <InfoContainer>
           <Flex container align="center">
             <LinkHeader onClick={() => history.push('/marketplace')}>
-              BoredApeYachtClub
+              Phunky Ape Yacht Club
             </LinkHeader>
             <h2>{`/ #${token?.num}`}</h2>
           </Flex>

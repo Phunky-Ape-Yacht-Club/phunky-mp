@@ -17,7 +17,8 @@ const NFTCard = ({
   disableBuyButton = false,
   enableMyOffer = false,
 }) => {
-  const imgLocation = localDirectory + nft.num + '.png'
+  const imgLocation =
+    'https://payc-images.s3.amazonaws.com/ipfs/' + nft.num + '.png'
   // min value comes in wei so we need to convert it into a Big Number and then to ETH for
   // display but keep the wei value for when we make the transctions to the contracts
   if (!nft.minValue) {

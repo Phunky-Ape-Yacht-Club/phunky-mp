@@ -36,3 +36,5 @@ typechain
 public/ipfs*
 .idea
 .DS_STORE
+# Local Netlify folder
+.netlify

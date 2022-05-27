@@ -48,6 +48,7 @@ function Marketplace({ web3, delegate }) {
   const [selectedSort, setSelectedSort] = useState('price_asc')
   useEffect(() => {}, [selectedSort])
 
+  console.log(state.galleryData)
   // Set subgraph data to reducer
   useEffect(() => {
     if (marketDataHook.subgraphData.data) {
@@ -82,7 +83,7 @@ function Marketplace({ web3, delegate }) {
               />
               <Pill
                 active={state.selectedView === 'view_all'}
-                text="View All"
+                text="View All (limit 300)"
                 onClick={() => onViewChange('view_all')}
               />
             </PillGroup>
@@ -101,7 +102,7 @@ function Marketplace({ web3, delegate }) {
               <NFTLoadingCards />
             ) : (
               state.galleryData
-                ?.slice(0, 20)
+                ?.slice(0, 200)
                 .map((ape, index) => (
                   <NFTCard
                     nft={ape.item}
