@@ -5,7 +5,7 @@ import fallbackImg from 'helpers/fallbackImg'
 import { buyPhunkyApe } from '../../contracts/contractUtil'
 import BN from 'bn.js'
 
-const localDirectory = '/ipfs/'
+const localDirectory = 'https://payc-images.s3.amazonaws.com/ipfs/'
 const spinners = '/assets/spinner.gif'
 
 const NFTCard = ({
@@ -14,6 +14,7 @@ const NFTCard = ({
   isLoading,
   web3,
   dispatch,
+  bids,
   disableBuyButton = false,
   enableMyOffer = false,
 }) => {
@@ -21,8 +22,22 @@ const NFTCard = ({
     'https://payc-images.s3.amazonaws.com/ipfs/' + nft.num + '.png'
   // min value comes in wei so we need to convert it into a Big Number and then to ETH for
   // display but keep the wei value for when we make the transctions to the contracts
+  let maxBid = new BN('0')
+  let bidTag = <p></p>
+  if (nft.phunkyApeBids && nft.phunkyApeBids.length) {
+    for (let i = 0; i < nft.phunkyApeBids.length; i++) {
+      let currentBid = new BN(nft.phunkyApeBids[i].bidAmount)
+      if (currentBid.gt(maxBid)) {
+        maxBid = currentBid
+      }
+    }
+    bidTag = (
+      <p>Highest Bid: {web3.utils.fromWei(maxBid.toString(), 'ether')}</p>
+    )
+  }
+
   if (!nft.minValue) {
-    nft.minValue = '69420'
+    nft.minValue = '0'
   }
   const price = new BN(nft.minValue)
   const ethPrice = web3 !== undefined ? web3.utils.fromWei(price, 'ether') : ''
@@ -62,16 +77,17 @@ const NFTCard = ({
       </Clickable>
       <CardInfo>
         <CardTitle>PAYC #{isLoading ? '0000' : nft.num}</CardTitle>
+        {bidTag}
         {nft.isForSale ? (
           <CardPrice>
-            {isLoading ? '69420' : ethPrice} Ξ
+            {isLoading ? '-' : ethPrice} Ξ
             {!disableBuyButton ?? (
               <BuyNow onClick={handlePhunkyApeBuy}>Buy Now</BuyNow>
             )}
           </CardPrice>
         ) : null}
         {enableMyOffer ? (
-          <CardPrice>My Offer {isLoading ? '69420' : bidEthPrice} Ξ</CardPrice>
+          <CardPrice>My Offer {isLoading ? '-' : bidEthPrice} Ξ</CardPrice>
         ) : null}
       </CardInfo>
     </Card>

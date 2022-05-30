@@ -107,6 +107,7 @@ function reducer(state, action) {
         id: ['', '', '', ''],
       }
     case 'SET_SUBGRAPH_DATA':
+      console.log(action.value.data)
       const apeListed = action.value.data.phunkyApes.map((ape) => {
         return normalizeApe(ape, true)
       })

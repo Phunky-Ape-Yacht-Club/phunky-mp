@@ -17,6 +17,11 @@ export const useSubgraphData = (web3) => {
             isForSale
             minValue
             currentOwner
+            phunkyApeBids{
+              id
+              bidAmount
+              from
+            }
           }
           bids {
             bidAmount

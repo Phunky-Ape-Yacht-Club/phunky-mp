@@ -48,7 +48,6 @@ function Marketplace({ web3, delegate }) {
   const [selectedSort, setSelectedSort] = useState('price_asc')
   useEffect(() => {}, [selectedSort])
 
-  console.log(state.galleryData)
   // Set subgraph data to reducer
   useEffect(() => {
     if (marketDataHook.subgraphData.data) {
@@ -76,11 +75,11 @@ function Marketplace({ web3, delegate }) {
                 text="For Sale"
                 onClick={() => onViewChange('for_sale')}
               />
-              <Pill
+              {/* <Pill
                 active={state.selectedView === 'has_bids'}
                 text="Has Bids"
                 onClick={() => onViewChange('has_bids')}
-              />
+              /> */}
               <Pill
                 active={state.selectedView === 'view_all'}
                 text="View All (limit 300)"

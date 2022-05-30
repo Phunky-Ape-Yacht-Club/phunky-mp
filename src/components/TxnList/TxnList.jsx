@@ -6,7 +6,7 @@ import { Image } from 'antd'
 const spinners = '/assets/small_spiner.svg'
 const x = '/assets/x.svg'
 const trash = '/assets/trash.svg'
-const localDirectory = '/ipfs/'
+const localDirectory = 'https://payc-images.s3.amazonaws.com/ipfs/'
 
 const TxnList = ({ delegate }) => {
   console.log(delegate)
