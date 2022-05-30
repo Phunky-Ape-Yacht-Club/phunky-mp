@@ -9,6 +9,8 @@ export const Pill = ({ active, text, onClick, icon }) => (
   </PillContainer>
 )
 
+const mobileWidth = 700
+
 const PillContainer = styled.button`
   background: ${(p) => (p.active ? '#bfc500' : 'black')};
   border: 1px solid #bfc500;
@@ -23,6 +25,10 @@ const PillContainer = styled.button`
   display: flex;
   justify-content: center;
   align-items: center;
+
+  @media (max-width: ${mobileWidth}px) {
+    padding: 4px 8px;
+  }
 `
 
 export const PillGroup = ({ children }) => {

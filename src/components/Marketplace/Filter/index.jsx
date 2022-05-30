@@ -210,6 +210,12 @@ const onClearFilters = (dispatch) => {
   dispatch({ type: 'RESET' })
 }
 
+const onToggleHideFilters = (dispatch) => {
+  dispatch({ type: 'TOGGLE_HIDE_FILTERS' })
+}
+
+const mobileWidth = 700
+
 const DropDown = ({ state, displayValue, options, filterType, dispatch }) => {
   return (
     <>
@@ -247,59 +253,69 @@ const DropDown = ({ state, displayValue, options, filterType, dispatch }) => {
 const Filter = ({ state, dispatch }) => {
   return (
     <Main>
-      <DropDownContainer>
-        <DropDown
-          state={state}
-          displayValue={state.bg}
-          options={bgOtions}
-          filterType={'bg'}
-          dispatch={dispatch}
-        />
-        <DropDown
-          state={state}
-          displayValue={state.clothes}
-          options={clothesOptions}
-          filterType={'clothes'}
-          dispatch={dispatch}
-        />
-        <DropDown
-          state={state}
-          displayValue={state.earring}
-          options={earringOptions}
-          filterType={'earring'}
-          dispatch={dispatch}
-        />
-        <DropDown
-          state={state}
-          displayValue={state.eyes}
-          options={eyesOptions}
-          filterType={'eyes'}
-          dispatch={dispatch}
-        />
-        <DropDown
-          state={state}
-          displayValue={state.fur}
-          options={furOptions}
-          filterType={'fur'}
-          dispatch={dispatch}
-        />
-        <DropDown
-          state={state}
-          displayValue={state.hat}
-          options={hatOptions}
-          filterType={'hat'}
-          dispatch={dispatch}
-        />
-        <DropDown
-          state={state}
-          displayValue={state.mouth}
-          options={mouthOptions}
-          filterType={'mouth'}
-          dispatch={dispatch}
-        />
-      </DropDownContainer>
-      <PAYCNumSearchInput state={state} dispatch={dispatch} />
+      {!state.hideFilters && (
+        <DropDownContainer>
+          <DropDown
+            state={state}
+            displayValue={state.bg}
+            options={bgOtions}
+            filterType={'bg'}
+            dispatch={dispatch}
+          />
+          <DropDown
+            state={state}
+            displayValue={state.clothes}
+            options={clothesOptions}
+            filterType={'clothes'}
+            dispatch={dispatch}
+          />
+          <DropDown
+            state={state}
+            displayValue={state.earring}
+            options={earringOptions}
+            filterType={'earring'}
+            dispatch={dispatch}
+          />
+          <DropDown
+            state={state}
+            displayValue={state.eyes}
+            options={eyesOptions}
+            filterType={'eyes'}
+            dispatch={dispatch}
+          />
+          <DropDown
+            state={state}
+            displayValue={state.fur}
+            options={furOptions}
+            filterType={'fur'}
+            dispatch={dispatch}
+          />
+          <DropDown
+            state={state}
+            displayValue={state.hat}
+            options={hatOptions}
+            filterType={'hat'}
+            dispatch={dispatch}
+          />
+          <DropDown
+            state={state}
+            displayValue={state.mouth}
+            options={mouthOptions}
+            filterType={'mouth'}
+            dispatch={dispatch}
+          />
+        </DropDownContainer>
+      )}
+      {!state.hideFilters && (
+        <PAYCNumSearchInput state={state} dispatch={dispatch} />
+      )}
       <ButtonContainer>
+        {window.innerWidth <= mobileWidth && (
+          <PrimaryButton
+            onClick={() => onToggleHideFilters(dispatch)}
+            text={state.hideFilters ? 'Show' : 'Hide'}
+          />
+        )}
         <PrimaryButton
           onClick={() => onClearFilters(dispatch)}
           text="Reset Filters"
@@ -314,10 +330,19 @@ const Main = styled('div')`
   display: flex;
   flex-direction: column;
   padding-right: 2rem;
+
+  @media (max-width: ${mobileWidth}px) {
+    margin: 2rem 0;
+    padding-right: 0;
+  }
 `
 
 const DropDownContainer = styled('div')`
   width: 100%;
+  @media (max-width: ${mobileWidth}px) {
+    max-height: 10vh;
+    overflow-y: auto;
+  }
 `
 
 const DropDownHeader = styled('div')`
