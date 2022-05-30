@@ -15,8 +15,6 @@ const Header = ({ delegate }) => {
     </NavMenu>
   )
 
-  // console.log(SORT_VALUES.find((item) => item.key === selectedSort))
-
   return (
     <AppHeader>
       <StyledNavLink to="/">
