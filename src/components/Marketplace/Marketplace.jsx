@@ -119,6 +119,8 @@ function Marketplace({ web3, delegate }) {
   )
 }
 
+const mobileWidth = 700
+
 const PageHeaderContainer = styled.div`
   display: grid;
   grid-template-columns: 3fr 9fr;
@@ -128,6 +130,11 @@ const PageHeaderContainer = styled.div`
     color: white;
     margin: 0 20px;
   }
+
+  @media (max-width: ${mobileWidth}px) {
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 const MarketPlaceContainer = styled.div`
@@ -135,6 +142,9 @@ const MarketPlaceContainer = styled.div`
   grid-gap: 1rem;
   grid-template-columns: 3fr 9fr;
   padding-bottom: 2rem;
+  @media (max-width: ${mobileWidth}px) {
+    grid-template-columns: none;
+  }
 `
 
 const GridContainer = styled.div`

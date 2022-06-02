@@ -22,6 +22,7 @@ const initialState = {
   phunkyApeBids: [],
   isGlobalLoadingStatus: false,
   isConfettiOn: false,
+  hideFilters: false,
 }
 
 function getInitialState() {
@@ -177,6 +178,11 @@ function reducer(state, action) {
       return {
         ...state,
         isConfettiOn: false,
+      }
+    case 'TOGGLE_HIDE_FILTERS':
+      return {
+        ...state,
+        hideFilters: !state.hideFilters,
       }
     default:
       throw new Error()

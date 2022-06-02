@@ -160,6 +160,8 @@ function MyCollection({ web3, delegate }) {
   )
 }
 
+const mobileWidth = 700
+
 const PageHeaderContainer = styled.div`
   display: grid;
   grid-template-columns: 3fr 9fr;
@@ -169,10 +171,18 @@ const PageHeaderContainer = styled.div`
     color: white;
     margin: 0 20px;
   }
+  @media (max-width: ${mobileWidth}px) {
+    display: flex;
+    flex-direction: column;
+  }
 `
 
 const CollectionContainer = styled.div`
   display: flex;
+
+  @media (max-width: ${mobileWidth}px) {
+    padding-top: 2rem;
+  }
 `
 
 const CollectionGrid = styled.div`
