@@ -5,7 +5,6 @@ import fallbackImg from 'helpers/fallbackImg'
 import { buyPhunkyApe } from '../../contracts/contractUtil'
 import BN from 'bn.js'
 
-const localDirectory = 'https://payc-images.s3.amazonaws.com/ipfs/'
 const spinners = '/assets/spinner.gif'
 
 const NFTCard = ({
@@ -32,7 +31,9 @@ const NFTCard = ({
       }
     }
     bidTag = (
-      <p>Highest Bid: {web3.utils.fromWei(maxBid.toString(), 'ether')}</p>
+      <p style={{ fontSize: '12px' }}>
+        Highest Offer: {web3.utils.fromWei(maxBid.toString(), 'ether')}
+      </p>
     )
   }
 

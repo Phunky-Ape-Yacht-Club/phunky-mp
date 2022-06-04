@@ -105,13 +105,14 @@ const NFTDetails = ({ web3 }) => {
 
         setTxnHistory(nft.data.phunkyApes[0].phunkyApeTransfers)
         setCurrentOwner(listing.currentOwner)
+        console.log(listing.phunkyApeBids)
         if (listing.phunkyApeBids.length > 0) {
-          let highestOffer = 0
+          let highestOffer = new BN('0')
           for (let i = 0; i < listing.phunkyApeBids.length; i++) {
-            highestOffer = Math.max(
-              highestOffer,
-              listing.phunkyApeBids[i].bidAmount
-            )
+            let currentBid = new BN(listing.phunkyApeBids[i].bidAmount)
+            if (currentBid.gt(highestOffer)) {
+              highestOffer = currentBid
+            }
           }
           try {
             const price = new BN(highestOffer)

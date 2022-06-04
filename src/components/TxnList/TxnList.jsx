@@ -2,11 +2,11 @@ import React from 'react'
 import styled from '@emotion/styled'
 import { faStaylinked } from '@fortawesome/free-brands-svg-icons'
 import { Image } from 'antd'
+import { localDirectory } from 'consts'
 
 const spinners = '/assets/small_spiner.svg'
 const x = '/assets/x.svg'
 const trash = '/assets/trash.svg'
-const localDirectory = 'https://payc-images.s3.amazonaws.com/ipfs/'
 
 const TxnList = ({ delegate }) => {
   console.log(delegate)
