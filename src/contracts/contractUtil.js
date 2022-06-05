@@ -199,6 +199,67 @@ export async function listPhunkyApe(
   }
 }
 
+export async function delistPhunkyApe(
+  nft,
+  phunkyApeId,
+  web3,
+  onSuccess,
+  onError
+) {
+  const waitForReceipt = (hash, cb) => {
+    web3.eth.getTransactionReceipt(hash, function (err, receipt) {
+      if (err) {
+        console.log('err occured')
+        console.log(err)
+      }
+
+      if (receipt !== null) {
+        // Transaction went through
+        if (cb) {
+          cb(receipt)
+        }
+      } else {
+        // Try again in 1 second
+        window.setTimeout(function () {
+          waitForReceipt(hash, cb)
+        }, 1000)
+      }
+    })
+  }
+
+  const contract = new web3.eth.Contract(
+    cryptoPhunksMarketAbi,
+    paycMarketPlaceContractAddr
+  )
+
+  // Input phunkyApeId into this field.
+  const abi_byte_string = await contract.methods
+    .paycNoLongerForSale(phunkyApeId)
+    .encodeABI()
+
+  const txObject = {
+    from: window.ethereum.selectedAddress,
+    to: paycMarketPlaceContractAddr,
+    data: abi_byte_string,
+    value: web3.utils.toHex(0),
+  }
+
+  try {
+    const tx_hash = await window.ethereum.request({
+      method: 'eth_sendTransaction',
+      params: [txObject],
+    })
+
+    await web3.eth.getTransactionReceipt(tx_hash, async (error, receipt) => {
+      waitForReceipt(tx_hash, async (receipt) => {
+        onSuccess(nft)
+      })
+    })
+  } catch (error) {
+    onError(nft)
+  }
+}
+
 export async function acceptBid(
   nft,
   acceptAmountInEther,

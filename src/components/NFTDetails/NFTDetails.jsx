@@ -191,10 +191,10 @@ const NFTDetails = ({ web3 }) => {
               {listing.isForSale ? (
                 <PrimaryButton text="Buy Now" onClick={() => purchaseNFT()} />
               ) : null}
-              <SecondaryButton
-                text="Offer"
+              {/* <SecondaryButton
+                text="Offer"                
                 onClick={() => setShowBidModal(true)}
-              />
+              /> */}
             </TransactionButtons>
           </PriceContainer>
           <Flex padding="2rem 0">

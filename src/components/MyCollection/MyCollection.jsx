@@ -138,6 +138,7 @@ function MyCollection({ web3, delegate }) {
         />
         <MyCurrentListingModal
           nft={state.selectedNft}
+          web3={web3}
           visible={state.isMyListingModalOpen}
           dispatch={dispatch}
           delegate={delegate}
