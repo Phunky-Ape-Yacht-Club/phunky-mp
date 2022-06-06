@@ -1,4 +1,4 @@
-const phunkyApeYachtClub721Abi = [
+export const phunkyApeYachtClub721Abi = [
   {
     inputs: [
       { internalType: 'string', name: '_name', type: 'string' },

@@ -1,5 +1,10 @@
 import { cryptoPhunksMarketAbi } from './abi/cryptoPhunksMarketABI'
-import { paycMarketPlaceContractAddr, paycSubGraphAPI } from '../consts'
+import { phunkyApeYachtClub721Abi } from './abi/phunkyApeYachtClub721ABI'
+import {
+  paycMarketPlaceContractAddr,
+  paycSubGraphAPI,
+  payc721ContractAddr,
+} from '../consts'
 import BN from 'bn.js'
 
 // TODO there is probably a lot of refactoring / drying up we can do on this files
@@ -168,6 +173,36 @@ export async function listPhunkyApe(
     cryptoPhunksMarketAbi,
     paycMarketPlaceContractAddr
   )
+
+  const paycContract = new web3.eth.Contract(
+    phunkyApeYachtClub721Abi,
+    payc721ContractAddr
+  )
+
+  const isApproved = await paycContract.methods
+    .isApprovedForAll(
+      window.ethereum.selectedAddress,
+      paycMarketPlaceContractAddr
+    )
+    .call()
+
+  if (!isApproved) {
+    const abi_byte_str_approved = await paycContract.methods
+      .setApprovalForAll(paycMarketPlaceContractAddr, true)
+      .encodeABI()
+
+    const approveTx = {
+      from: window.ethereum.selectedAddress,
+      to: payc721ContractAddr,
+      data: abi_byte_str_approved,
+      value: web3.utils.toHex(0),
+    }
+
+    await window.ethereum.request({
+      method: 'eth_sendTransaction',
+      params: [approveTx],
+    })
+  }
 
   const listPrice = new BN(web3.utils.toWei(listAmountInEther, 'ether')) // Ape price demoninated in wei.
   const amountInWei = listPrice.toString()
