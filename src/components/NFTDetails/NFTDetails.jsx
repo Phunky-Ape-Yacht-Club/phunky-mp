@@ -168,7 +168,13 @@ const NFTDetails = ({ web3 }) => {
           </Flex>
           <Flex padding="16px 0">
             <Label>
-              Owned by: <a>{getEllipsisTxt(currentOwner, 4)}</a>
+              Owned by:{' '}
+              <a
+                href={`https://etherscan.io/address/${currentOwner}`}
+                target="_blank"
+              >
+                {getEllipsisTxt(currentOwner, 4)}
+              </a>
             </Label>
           </Flex>
           <Label>Price</Label>
