@@ -2,8 +2,7 @@ import React, { useState } from 'react'
 import { Modal, Input, Button } from 'antd'
 import { listPhunkyApe } from '../../contracts/contractUtil'
 import { v4 as uuidv4 } from 'uuid'
-
-const localDirectory = "'https://payc-images.s3.amazonaws.com/ipfs/'"
+import { localDirectory } from 'consts'
 
 const ListingModal = ({ nft, visible, dispatch, web3, delegate }) => {
   const imgLocation = localDirectory + nft.num + '.png'

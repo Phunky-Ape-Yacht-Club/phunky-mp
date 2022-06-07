@@ -1,7 +1,9 @@
 import { Modal, Input, Spin, Button } from 'antd'
+import { delistPhunkyApe } from '../../contracts/contractUtil'
 
-const MyCurrentListingModal = ({ visible, dispatch, delegate }) => {
+const MyCurrentListingModal = ({ visible, dispatch, delegate, nft, web3 }) => {
   console.log(visible)
+  console.log(nft)
   return (
     <Modal
       title={`My Current Listing`}
@@ -23,12 +25,28 @@ const MyCurrentListingModal = ({ visible, dispatch, delegate }) => {
         >
           Cancel
         </Button>,
-        <Button onClick={() => {}} type="primary">
+        <Button
+          onClick={() => {
+            delistPhunkyApe(
+              nft,
+              nft.id,
+              web3,
+              () => {},
+              () => {}
+            )
+            dispatch({
+              type: 'SET_MY_LISTING_MODAL_STATUS',
+              value: false,
+              nft: {},
+            })
+          }}
+          type="primary"
+        >
           Delist PAYC
         </Button>,
       ]}
     >
-      <Spin>
+      {/* <Spin>
         <img
           alt="nft to send"
           style={{
@@ -39,7 +57,7 @@ const MyCurrentListingModal = ({ visible, dispatch, delegate }) => {
           }}
         />
         <Input autoFocus placeholder="Listing Price (Ξ)" onChange={(e) => {}} />
-      </Spin>
+      </Spin> */}
     </Modal>
   )
 }

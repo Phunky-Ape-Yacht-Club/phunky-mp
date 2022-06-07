@@ -1,5 +1,6 @@
 import { Modal, Input, Spin, Button } from 'antd'
-const localDirectory = 'https://payc-images.s3.amazonaws.com/ipfs/'
+import { localDirectory } from 'consts'
+
 const MyOffersModal = ({ nft, visible, dispatch, delegate }) => {
   const imgLocation = localDirectory + nft.num + '.png'
   return (

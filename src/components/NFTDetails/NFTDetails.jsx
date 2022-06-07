@@ -105,13 +105,14 @@ const NFTDetails = ({ web3 }) => {
 
         setTxnHistory(nft.data.phunkyApes[0].phunkyApeTransfers)
         setCurrentOwner(listing.currentOwner)
+        console.log(listing.phunkyApeBids)
         if (listing.phunkyApeBids.length > 0) {
-          let highestOffer = 0
+          let highestOffer = new BN('0')
           for (let i = 0; i < listing.phunkyApeBids.length; i++) {
-            highestOffer = Math.max(
-              highestOffer,
-              listing.phunkyApeBids[i].bidAmount
-            )
+            let currentBid = new BN(listing.phunkyApeBids[i].bidAmount)
+            if (currentBid.gt(highestOffer)) {
+              highestOffer = currentBid
+            }
           }
           try {
             const price = new BN(highestOffer)
@@ -167,7 +168,13 @@ const NFTDetails = ({ web3 }) => {
           </Flex>
           <Flex padding="16px 0">
             <Label>
-              Owned by: <a>{getEllipsisTxt(currentOwner, 4)}</a>
+              Owned by:{' '}
+              <a
+                href={`https://etherscan.io/address/${currentOwner}`}
+                target="_blank"
+              >
+                {getEllipsisTxt(currentOwner, 4)}
+              </a>
             </Label>
           </Flex>
           <Label>Price</Label>
@@ -190,10 +197,10 @@ const NFTDetails = ({ web3 }) => {
               {listing.isForSale ? (
                 <PrimaryButton text="Buy Now" onClick={() => purchaseNFT()} />
               ) : null}
-              <SecondaryButton
-                text="Offer"
+              {/* <SecondaryButton
+                text="Offer"                
                 onClick={() => setShowBidModal(true)}
-              />
+              /> */}
             </TransactionButtons>
           </PriceContainer>
           <Flex padding="2rem 0">

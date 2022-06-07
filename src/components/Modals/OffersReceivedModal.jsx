@@ -2,7 +2,7 @@ import { Modal, Input, Spin, Button } from 'antd'
 import BN from 'bn.js'
 import { acceptBid } from '../../contracts/contractUtil'
 
-const localDirectory = '/ipfs/'
+import { localDirectory } from 'consts'
 
 const OffersReceivedModal = ({ nft, visible, dispatch, web3, delegate }) => {
   const imgLocation = localDirectory + nft.num + '.png'
@@ -68,7 +68,7 @@ const OffersReceivedModal = ({ nft, visible, dispatch, web3, delegate }) => {
           marginBottom: '15px',
         }}
       />
-      <h2>Highest Bid: {highestBidEth} Ξ</h2>
+      <h2>Highest Offer: {highestBidEth} Ξ</h2>
     </Modal>
   )
 }

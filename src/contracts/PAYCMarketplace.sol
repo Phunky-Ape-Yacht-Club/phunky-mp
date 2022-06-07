@@ -27,9 +27,6 @@ contract PAYCMarketplace is ReentrancyGuard, Pausable, Ownable {
     // A record of PAYC that are offered for sale at a specific minimum value, and perhaps to a specific person
     mapping (uint => Offer) public paycOfferedForSale;
 
-    // indexes represent token IDs and each index stores a boolean
-    bool[10000] public paycOnSaleStatus;
-
     // A record of the highest bid
     mapping (uint => Bid) public paycBids;
 
@@ -69,8 +66,7 @@ contract PAYCMarketplace is ReentrancyGuard, Pausable, Ownable {
     /* Allows the owner of a PAYC to stop offering it for sale */
     function paycNoLongerForSale(uint paycIndex) public nonReentrant() {
         if (paycIndex >= 10000) revert('token index not valid');
-        if (paycContract.ownerOf(paycIndex) != msg.sender) revert('you are not the owner of this token');
-        paycOnSaleStatus[paycIndex] = false;
+        if (paycContract.ownerOf(paycIndex) != msg.sender) revert('you are not the owner of this token');        
         paycOfferedForSale[paycIndex] = Offer(false, paycIndex, msg.sender, 0, address(0x0));
         emit PaycNoLongerForSale(paycIndex);
     }
@@ -78,8 +74,7 @@ contract PAYCMarketplace is ReentrancyGuard, Pausable, Ownable {
     /* Allows a PAYC owner to offer it for sale */
     function offerPaycForSale(uint paycIndex, uint minSalePriceInWei) public whenNotPaused nonReentrant()  {
         if (paycIndex >= 10000) revert('token index not valid');
-        if (paycContract.ownerOf(paycIndex) != msg.sender) revert('you are not the owner of this token');
-        paycOnSaleStatus[paycIndex] = true;
+        if (paycContract.ownerOf(paycIndex) != msg.sender) revert('you are not the owner of this token');        
         paycOfferedForSale[paycIndex] = Offer(true, paycIndex, msg.sender, minSalePriceInWei, address(0x0));
         emit PaycOffered(paycIndex, minSalePriceInWei, address(0x0));
     }
@@ -87,8 +82,7 @@ contract PAYCMarketplace is ReentrancyGuard, Pausable, Ownable {
     /* Allows a PAYC owner to offer it for sale to a specific address */
     function offerPaycForSaleToAddress(uint paycIndex, uint minSalePriceInWei, address toAddress) public whenNotPaused nonReentrant() {
         if (paycIndex >= 10000) revert();
-        if (paycContract.ownerOf(paycIndex) != msg.sender) revert('you are not the owner of this token');
-        paycOnSaleStatus[paycIndex] = true;
+        if (paycContract.ownerOf(paycIndex) != msg.sender) revert('you are not the owner of this token');        
         paycOfferedForSale[paycIndex] = Offer(true, paycIndex, msg.sender, minSalePriceInWei, toAddress);
         emit PaycOffered(paycIndex, minSalePriceInWei, toAddress);
     }
@@ -107,8 +101,7 @@ contract PAYCMarketplace is ReentrancyGuard, Pausable, Ownable {
 
         paycOfferedForSale[paycIndex] = Offer(false, paycIndex, msg.sender, 0, address(0x0));
         paycContract.safeTransferFrom(seller, msg.sender, paycIndex);
-        pendingWithdrawals[seller] += msg.value;
-        paycOnSaleStatus[paycIndex] = false;
+        pendingWithdrawals[seller] += msg.value;        
         emit PaycBought(paycIndex, msg.value, seller, msg.sender);
 
         // Check for the case where there is a bid from the new owner and refund it.
@@ -159,8 +152,7 @@ contract PAYCMarketplace is ReentrancyGuard, Pausable, Ownable {
         paycOfferedForSale[paycIndex] = Offer(false, paycIndex, bidder, 0, address(0x0));
         uint amount = bid.value;
         paycBids[paycIndex] = Bid(false, paycIndex, address(0x0), 0);
-        paycContract.safeTransferFrom(msg.sender, bidder, paycIndex);
-        paycOnSaleStatus[paycIndex] = false;
+        paycContract.safeTransferFrom(msg.sender, bidder, paycIndex);        
         pendingWithdrawals[seller] += amount;
         emit PaycBought(paycIndex, bid.value, seller, bidder);
     }
@@ -177,14 +169,4 @@ contract PAYCMarketplace is ReentrancyGuard, Pausable, Ownable {
         payable(msg.sender).transfer(amount);
     }
 
-    /* Check if PAYC is on sale */
-    function isPaycOnSale(uint paycIndex) public view returns(bool) {
-        if (paycIndex >= 10000) revert('token index not valid');
-        return paycOnSaleStatus[paycIndex];
-    }
-
-    /* Get list of bools on all PAYC sale statuses */
-    function getPaycOnSaleStatus() public view returns(bool[10000] memory) {
-        return paycOnSaleStatus;
-    }
 }
