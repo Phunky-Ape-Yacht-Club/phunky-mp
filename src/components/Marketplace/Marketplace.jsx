@@ -102,7 +102,16 @@ function Marketplace({ web3, delegate }) {
             ) : (
               state.galleryData
                 ?.slice(0, 200)
-                .map((ape, index) => (
+                ?.sort((a, b) => {
+                  if (selectedSort === 'price_asc') {
+                    return +a?.item?.minValue - +b?.item?.minValue
+                  } else if (selectedSort === 'price_desc') {
+                    return +b?.item?.minValue - +a?.item?.minValue
+                  } else if (selectedSort === 'recent') {
+                    return true
+                  }
+                })
+                ?.map((ape, index) => (
                   <NFTCard
                     nft={ape.item}
                     key={index}
