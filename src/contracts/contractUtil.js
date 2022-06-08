@@ -140,6 +140,38 @@ export async function bidOnPhunkyApe(
   }
 }
 
+// export async function withdrawlAmount(
+//   web3,
+// ) {
+//   const contract = new web3.eth.Contract(
+//     cryptoPhunksMarketAbi,
+//     paycMarketPlaceContractAddr
+//   )
+//   const withdrawAmt = await contract.methods.pendingWithdrawals(window.ethereum.selectedAddress).call()
+//   console.log("withdrawl amount..", withdrawAmt)
+//   return withdrawAmt
+// }
+
+export async function withdraw(web3) {
+  const contract = new web3.eth.Contract(
+    cryptoPhunksMarketAbi,
+    paycMarketPlaceContractAddr
+  )
+  const withdraw_byte_str = await contract.methods.withdraw().encodeABI()
+  const approveTx = {
+    from: window.ethereum.selectedAddress,
+    to: paycMarketPlaceContractAddr,
+    data: withdraw_byte_str,
+    value: web3.utils.toHex(0),
+  }
+
+  await window.ethereum.request({
+    method: 'eth_sendTransaction',
+    params: [approveTx],
+  })
+  return
+}
+
 export async function listPhunkyApe(
   nft,
   listAmountInEther,
@@ -187,6 +219,11 @@ export async function listPhunkyApe(
     .call()
 
   if (!isApproved) {
+    console.log(
+      isApproved,
+      window.ethereum.selectedAddress,
+      paycMarketPlaceContractAddr
+    )
     const abi_byte_str_approved = await paycContract.methods
       .setApprovalForAll(paycMarketPlaceContractAddr, true)
       .encodeABI()

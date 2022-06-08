@@ -7,7 +7,7 @@ import detectEthereumProvider from '@metamask/detect-provider'
 
 // TODO: move to config based instead of hard coding
 const web3 = new Web3(
-  'https://rinkeby.infura.io/v3/1b374167f9f44a9aab01f75e8367a34a'
+  'https://eth-mainnet.alchemyapi.io/v2/FoyJ5k74vjxe1Wgn6vRgYMQikX-QhdML'
 )
 
 const Application = () => {

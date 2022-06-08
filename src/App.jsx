@@ -61,7 +61,7 @@ const App = ({ web3 }) => {
               <Route path="/collection">
                 <MyCollection web3={web3} delegate={delegate} />
               </Route>
-              <Route path="/faq" component={FAQ} />
+              <Route path="/faq" component={FAQ} web3={web3} />
               <Route path="/details/:id">
                 <NFTDetails web3={web3} />
               </Route>

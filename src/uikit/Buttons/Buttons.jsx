@@ -41,8 +41,8 @@ export const SecondaryButton = ({ onClick, text, children, fat = false }) => (
 )
 
 const StyledButtonSecondary = styled.button`
-  background-color: black;
-  color: #bfc500;
+  background-color: #bfc500;
+  color: #000;
   border: 1px solid #bfc500;
   border-radius: 8px;
   font-weight: 700;
@@ -50,15 +50,18 @@ const StyledButtonSecondary = styled.button`
   padding: ${(p) => (p.fat ? '16px' : '8px 16px')};
   margin: auto auto;
   transition: 0.3s;
+  margin: 20px;
+  height: 10%;
   width: 100%;
   text-transform: uppercase;
+  text-align: center;
   cursor: pointer;
   display: flex;
   justify-content: center;
 
   :hover {
     background: white;
-    color: black;
+    border-color: white;
   }
 `
 

@@ -65,7 +65,7 @@ function Marketplace({ web3, delegate }) {
       ) : null}
       {state.isGlobalLoadingStatus ? <Spinners /> : null}
       <CommonContainer>
-        <Header delegate={delegate} />
+        <Header delegate={delegate} web3={web3} />
         <PageHeaderContainer>
           <PageTitle title="Marketplace" />
           <Flex container align="center" justify="space-between">

@@ -6,7 +6,7 @@ import AccountButton from '../AccountButton/AccountButton'
 import { Dropdown, Image } from 'antd'
 import MenuItem from 'antd/lib/menu/MenuItem'
 
-const Header = ({ delegate }) => {
+const Header = ({ delegate, web3 }) => {
   const menu = () => (
     <NavMenu>
       <NavLink to="/marketplace">Marketplace</NavLink>
@@ -45,7 +45,7 @@ const Header = ({ delegate }) => {
         )}
 
         <AccountContainer>
-          <AccountButton />
+          <AccountButton web3={web3} />
         </AccountContainer>
       </HeaderActions>
     </AppHeader>

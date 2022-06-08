@@ -6,4 +6,4 @@ export const paycSubGraphAPI =
   'https://api.studio.thegraph.com/query/18229/paycmarket/v2.5.7'
 export const localDirectory = 'https://payc-images.s3.amazonaws.com/ipfs/'
 export const web3ProviderURL =
-  'https://rinkeby.infura.io/v3/1b374167f9f44a9aab01f75e8367a34a'
+  'https://eth-mainnet.alchemyapi.io/v2/FoyJ5k74vjxe1Wgn6vRgYMQikX-QhdML'

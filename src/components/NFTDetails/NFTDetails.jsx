@@ -136,7 +136,7 @@ const NFTDetails = ({ web3 }) => {
         />
       ) : null}
       {isGlobalLoadingStatus ? <Spinners /> : null}
-      <Header />
+      <Header web3={web3} />
       <NFTDetailsContainer>
         <Flex>
           <Image
