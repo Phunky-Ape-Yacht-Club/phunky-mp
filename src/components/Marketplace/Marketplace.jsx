@@ -101,7 +101,7 @@ function Marketplace({ web3, delegate }) {
               <NFTLoadingCards />
             ) : (
               state.galleryData
-                ?.slice(0, 200)
+                ?.slice(0, 300)
                 ?.sort((a, b) => {
                   if (selectedSort === 'price_asc') {
                     return +a?.item?.minValue - +b?.item?.minValue

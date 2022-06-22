@@ -12,7 +12,7 @@ export const useSubgraphData = (web3) => {
       },
       body: JSON.stringify({
         query: `{
-          phunkyApes(first: 20, where: {isForSale: true}) {
+          phunkyApes(where: {isForSale: true}) {
             id
             isForSale
             minValue
